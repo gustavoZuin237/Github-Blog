@@ -6,11 +6,17 @@ export const PostContainer = styled.div`
   padding: 2rem;
   background-color: ${(props) => props.theme['base-post']};
   border-radius: 10px;
+  border: 2px solid transparent;
+  transition: border-color 0.4s;
+
+  &:hover {
+    border-color: ${(props) => props.theme['base-label']};
+    cursor: pointer;
+  }
 `
 
 export const PostHeaderContainer = styled.header`
   display: flex;
-  gap: 1rem;
   margin-bottom: 1.25rem;
 `
 

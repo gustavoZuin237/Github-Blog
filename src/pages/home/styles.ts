@@ -13,7 +13,7 @@ export const UserProfileCard = styled.div`
   width: 54rem;
   height: 13.25rem;
   background-color: ${(props) => props.theme['base-profile']};
-  padding: 2.5rem 2rem;
+  padding: 2rem 2rem;
   margin-bottom: 4.5rem;
   border-radius: 10px;
 
@@ -21,8 +21,8 @@ export const UserProfileCard = styled.div`
   gap: 2rem;
 `
 
-export const UserProfilePicture = styled.div`
-  min-width: 9.25rem;
+export const UserProfilePicture = styled.img`
+  max-width: 9.25rem;
   min-height: 9.25rem;
   border-radius: 8px;
 `
@@ -51,6 +51,11 @@ export const GithubLink = styled.a`
   font-weight: 700;
   text-decoration: none;
   color: ${(props) => props.theme.blue};
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    border-color: ${(props) => props.theme.blue};
+  }
 `
 
 export const Bio = styled.p`
@@ -113,12 +118,10 @@ export const SearchForm = styled.form`
 
     &:focus {
       border-color: ${(props) => props.theme.blue};
-
-      ::placeholder {
-        color: ${(props) => props.theme['base-text']};
-      }
+      color: ${(props) => props.theme['base-text']};
     }
   }
+  // TODO Turn this into a new component
 `
 
 export const PostsFeed = styled.div`
