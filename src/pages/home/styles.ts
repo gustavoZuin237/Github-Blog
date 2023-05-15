@@ -121,7 +121,7 @@ export const SearchForm = styled.form`
       color: ${(props) => props.theme['base-text']};
     }
   }
-  // TODO Turn this into a new component
+  // ! Turn this into a new component
 `
 
 export const PostsFeed = styled.div`

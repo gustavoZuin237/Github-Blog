@@ -1,25 +1,12 @@
-import { PostPreview } from './components/post'
+import { PostPreview } from './components/postPreview'
 
-import { useState, useEffect } from 'react'
-
-import { api } from '../../lib/axios'
+import { useContext } from 'react'
+import { GithubDataContext } from '../../contexts/GithubDataContext'
 
 import * as s from './styles'
 
-// interface UserDataI {}
-// TODO Fix the typing problems
-
 export function Home() {
-  const [userData, setUserData] = useState({})
-
-  const fetchUser = async () => {
-    const response = await api.get('/users/gustavoZuin237')
-    setUserData(response.data)
-  }
-
-  useEffect(() => {
-    fetchUser()
-  }, [])
+  const { userData, posts } = useContext(GithubDataContext)
 
   return (
     <s.HomePageContainer>
@@ -43,7 +30,7 @@ export function Home() {
               *icon*{' '}
               {userData.company !== null ? userData.company : 'Indefinido'}
             </s.Socials>
-            <s.Socials>*icon* {userData.followers}</s.Socials>
+            <s.Socials>*icon* {userData.followers} seguidores</s.Socials>
           </s.SocialsInfo>
         </s.UserInformation>
       </s.UserProfileCard>
@@ -60,10 +47,13 @@ export function Home() {
       </s.SearchFormContainer>
 
       <s.PostsFeed>
-        <PostPreview />
-        <PostPreview />
-        <PostPreview />
-        <PostPreview />
+        {posts.length > 0 ? (
+          posts.map((post) => {
+            return <PostPreview key={post.number} {...post} />
+          })
+        ) : (
+          <></>
+        )}
       </s.PostsFeed>
     </s.HomePageContainer>
   )
