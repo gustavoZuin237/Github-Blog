@@ -3,10 +3,28 @@ import { PostPreview } from './components/postPreview'
 import { useContext } from 'react'
 import { GithubDataContext } from '../../contexts/GithubDataContext'
 
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
 import * as s from './styles'
 
+const searchFormSchema = z.object({
+  query: z.string(),
+})
+
+type SearchFormInputs = z.infer<typeof searchFormSchema>
+
 export function Home() {
-  const { userData, posts } = useContext(GithubDataContext)
+  const { userData, posts, fetchIssues } = useContext(GithubDataContext)
+
+  const { register, handleSubmit } = useForm<SearchFormInputs>({
+    resolver: zodResolver(searchFormSchema),
+  })
+
+  async function handlePostSearch(data: SearchFormInputs) {
+    fetchIssues(data.query)
+  }
 
   return (
     <s.HomePageContainer>
@@ -19,7 +37,12 @@ export function Home() {
         <s.UserInformation>
           <s.NameContainer>
             <s.Name>{userData.name}</s.Name>
-            <s.GithubLink href="">GITHUB *icon*</s.GithubLink>
+            <s.GithubLink
+              href={`https://github.com/${userData.login}`}
+              target="_blank"
+            >
+              GITHUB *icon*
+            </s.GithubLink>
           </s.NameContainer>
 
           <s.Bio>{userData.bio}</s.Bio>
@@ -38,11 +61,17 @@ export function Home() {
       <s.SearchFormContainer>
         <s.PostsInfoContainer>
           <s.Subtitle>Publicações</s.Subtitle>
-          <s.PostsAmountDisplay>0 publicações</s.PostsAmountDisplay>
+          <s.PostsAmountDisplay>
+            {posts.length} publicações
+          </s.PostsAmountDisplay>
         </s.PostsInfoContainer>
 
-        <s.SearchForm>
-          <input type="text" placeholder="Buscar conteúdo" />
+        <s.SearchForm onSubmit={handleSubmit(handlePostSearch)}>
+          <input
+            type="text"
+            placeholder="Buscar conteúdo"
+            {...register('query')}
+          />
         </s.SearchForm>
       </s.SearchFormContainer>
 

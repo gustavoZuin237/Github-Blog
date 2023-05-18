@@ -1,6 +1,8 @@
+import { NavLink } from 'react-router-dom'
+
 import styled from 'styled-components'
 
-export const PostContainer = styled.div`
+export const PostContainer = styled(NavLink)`
   width: 26rem;
   height: 16.25rem;
   padding: 2rem;
@@ -8,6 +10,8 @@ export const PostContainer = styled.div`
   border-radius: 10px;
   border: 2px solid transparent;
   transition: border-color 0.4s;
+
+  text-decoration: none;
 
   &:hover {
     border-color: ${(props) => props.theme['base-label']};
@@ -17,6 +21,8 @@ export const PostContainer = styled.div`
 
 export const PostHeaderContainer = styled.header`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1.25rem;
 `
 

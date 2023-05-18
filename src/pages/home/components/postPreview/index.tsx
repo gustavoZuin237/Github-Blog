@@ -2,12 +2,20 @@ import * as s from './styles'
 
 import { IssueDataI } from '../../../../contexts/GithubDataContext'
 
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+
 export function PostPreview(props: IssueDataI) {
   return (
-    <s.PostContainer>
+    <s.PostContainer to={'/post'} state={props}>
       <s.PostHeaderContainer>
         <s.PostTitle>{props.title}</s.PostTitle>
-        <s.PostDate>{props.created_at}</s.PostDate>
+        <s.PostDate>
+          {formatDistanceToNow(new Date(props.created_at), {
+            addSuffix: true,
+            locale: ptBR,
+          })}
+        </s.PostDate>
       </s.PostHeaderContainer>
 
       <s.PostDescription>{props.body}</s.PostDescription>

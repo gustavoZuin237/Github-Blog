@@ -1,31 +1,58 @@
 import * as s from './styles'
 
+import { useLocation } from 'react-router-dom'
+
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+
+interface PostDataI {
+  title: string
+  number: number
+  created_at: number // ? Make this a date
+  comments: number
+  body: string
+  user: {
+    login: string
+  }
+}
+
 export function Post() {
+  const location = useLocation()
+  const postData: PostDataI = location.state
+
   return (
     <s.PostContainer>
       <s.PostInfoCard>
         <s.PostInformation>
           <s.TitleContainer>
             <s.LinkContainer>
-              <s.Link href="">*icon* VOLTAR</s.Link>
-              <s.Link href="">VER NO GITHUB *icon*</s.Link>
+              <s.Link href="/">*icon* VOLTAR</s.Link>
+              <s.Link
+                href={`https://github.com/${postData.user.login}/Github-Blog/issues/${postData.number}`}
+                target="_blank"
+              >
+                VER NO GITHUB *icon*
+              </s.Link>
             </s.LinkContainer>
 
-            <s.Title>TÍTULO DO POST</s.Title>
+            <s.Title>{postData.title}</s.Title>
           </s.TitleContainer>
 
           <s.StatsContainer>
-            <s.Stats>*icon* LOGIN</s.Stats>
-            <s.Stats>*icon* DATA DE POSTAGEM</s.Stats>
-            <s.Stats>*icon* COMENTÁRIOS</s.Stats>
+            <s.Stats>*icon* {postData.user.login}</s.Stats>
+            <s.Stats>
+              *icon*{' '}
+              {formatDistanceToNow(new Date(postData.created_at), {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+            </s.Stats>
+            <s.Stats>*icon* {postData.comments}</s.Stats>
           </s.StatsContainer>
         </s.PostInformation>
       </s.PostInfoCard>
 
-      <s.PostBody>
-        <h1>This is the post body</h1>
-        <p>Here is an absolutely incredible piece of text!</p>
-      </s.PostBody>
+      <s.PostBody>{postData.body}</s.PostBody>
     </s.PostContainer>
   )
 }

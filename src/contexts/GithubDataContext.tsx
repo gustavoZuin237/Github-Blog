@@ -22,7 +22,7 @@ export interface IssueDataI {
   url: string
   title: string
   login: string
-  created_at: number // ? Turn this into a date
+  created_at: Date
   comments: number
   body: string
 }
@@ -37,7 +37,7 @@ interface GithubDataContextI {
   posts: IssueDataI[]
   setPosts: any // ! How do i type set state functions?
   fetchUser: () => void
-  fetchIssues: () => void
+  fetchIssues: (query: string) => void
 } // ? Make this better
 
 export const GithubDataContext = createContext({} as GithubDataContextI)
@@ -54,18 +54,17 @@ export function GithubDataContextProvider({
     setUserData(response.data)
   }, [])
 
-  const fetchIssues = useCallback(async () => {
+  const fetchIssues = useCallback(async (query?: string) => {
     const response = await api.get(
-      `search/issues?q=%20repo:gustavoZuin237/Github-Blog`,
+      `search/issues?q=${query}%20repo:gustavoZuin237/Github-Blog`,
     )
     setPosts(response.data.items)
-    console.log(posts)
-  }, [posts]) // ! Fix the query system
+  }, [])
 
   useEffect(() => {
     fetchUser()
-    fetchIssues()
-  }, [])
+    fetchIssues('')
+  }, [fetchUser, fetchIssues])
 
   return (
     <GithubDataContext.Provider

@@ -47,6 +47,10 @@ export const Name = styled.h1`
 `
 
 export const GithubLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
   font-size: 0.75rem;
   font-weight: 700;
   text-decoration: none;
