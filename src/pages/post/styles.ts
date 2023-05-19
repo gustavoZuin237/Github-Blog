@@ -65,7 +65,9 @@ export const Stats = styled.span`
   line-height: 1.6;
 `
 
-export const PostBody = styled.div`
+export const PostBody = styled.p`
   width: 54rem;
   padding: 2.5rem 2rem;
+  color: ${(props) => props.theme['base-text']};
+  line-height: 1.6;
 `

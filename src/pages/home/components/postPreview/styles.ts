@@ -22,12 +22,11 @@ export const PostContainer = styled(NavLink)`
 export const PostHeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 1.25rem;
 `
 
 export const PostTitle = styled.h1`
-  max-width: 17.68rem;
+  max-width: 16rem;
   color: ${(props) => props.theme['base-title']};
   font-size: 1.25rem;
   font-weight: 700;

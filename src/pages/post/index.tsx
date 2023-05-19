@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 
+import ReactMarkdown from 'react-markdown'
+
 interface PostDataI {
   title: string
   number: number
@@ -52,7 +54,9 @@ export function Post() {
         </s.PostInformation>
       </s.PostInfoCard>
 
-      <s.PostBody>{postData.body}</s.PostBody>
+      <s.PostBody>
+        <ReactMarkdown>{postData.body}</ReactMarkdown>
+      </s.PostBody>
     </s.PostContainer>
   )
 }
