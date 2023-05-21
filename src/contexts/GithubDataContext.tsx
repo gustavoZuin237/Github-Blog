@@ -33,19 +33,24 @@ interface GithubDataContextProviderProps {
 
 interface GithubDataContextI {
   userData: UserDataI
-  setUserData: any // ! How do i type set state functions?
   posts: IssueDataI[]
-  setPosts: any // ! How do i type set state functions?
   fetchUser: () => void
   fetchIssues: (query: string) => void
-} // ? Make this better
+}
 
 export const GithubDataContext = createContext({} as GithubDataContextI)
 
 export function GithubDataContextProvider({
   children,
 }: GithubDataContextProviderProps) {
-  const [userData, setUserData] = useState<UserDataI>({})
+  const [userData, setUserData] = useState<UserDataI>({
+    avatar_url: '',
+    name: '',
+    bio: '',
+    login: '',
+    company: '',
+    followers: 0,
+  })
 
   const [posts, setPosts] = useState<IssueDataI[]>([])
 
@@ -68,7 +73,7 @@ export function GithubDataContextProvider({
 
   return (
     <GithubDataContext.Provider
-      value={{ userData, setUserData, posts, setPosts, fetchUser, fetchIssues }}
+      value={{ userData, posts, fetchUser, fetchIssues }}
     >
       {children}
     </GithubDataContext.Provider>

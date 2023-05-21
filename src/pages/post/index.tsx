@@ -10,7 +10,7 @@ import ReactMarkdown from 'react-markdown'
 interface PostDataI {
   title: string
   number: number
-  created_at: number // ? Make this a date
+  created_at: Date
   comments: number
   body: string
   user: {
