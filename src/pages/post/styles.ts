@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 
 export const PostContainer = styled.div`
   display: flex;
@@ -31,6 +31,16 @@ export const TitleContainer = styled.div`
   margin-bottom: 0.5rem;
 `
 
+interface IconProps {
+  size?: number
+  theme: DefaultTheme
+}
+
+export const Icon = styled.img`
+  width: ${(props: IconProps) => (props.size === 12 ? `12px` : `18px`)};
+  height: ${(props: IconProps) => (props.size === 12 ? `12px` : `18px`)};
+`
+
 export const Title = styled.h1`
   color: ${(props) => props.theme['base-title']};
   font-size: 1.5rem;
@@ -61,6 +71,9 @@ export const StatsContainer = styled.div`
 `
 
 export const Stats = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: ${(props) => props.theme['base-span']};
   line-height: 1.6;
 `

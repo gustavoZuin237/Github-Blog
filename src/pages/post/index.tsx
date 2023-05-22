@@ -28,12 +28,24 @@ export function Post() {
         <s.PostInformation>
           <s.TitleContainer>
             <s.LinkContainer>
-              <s.Link href="/">*icon* VOLTAR</s.Link>
+              <s.Link href="/">
+                <s.Icon
+                  size={12}
+                  src="src\assets\icons\post\chevron-left.svg"
+                  alt=""
+                />{' '}
+                VOLTAR
+              </s.Link>
               <s.Link
                 href={`https://github.com/${postData.user.login}/Github-Blog/issues/${postData.number}`}
                 target="_blank"
               >
-                VER NO GITHUB *icon*
+                VER NO GITHUB{' '}
+                <s.Icon
+                  size={12}
+                  src="src\assets\icons\arrow-up-right-from-square.svg"
+                  alt=""
+                />
               </s.Link>
             </s.LinkContainer>
 
@@ -41,15 +53,21 @@ export function Post() {
           </s.TitleContainer>
 
           <s.StatsContainer>
-            <s.Stats>*icon* {postData.user.login}</s.Stats>
             <s.Stats>
-              *icon*{' '}
+              <s.Icon src="src\assets\icons\github.svg" alt="" />{' '}
+              {postData.user.login}
+            </s.Stats>
+            <s.Stats>
+              <s.Icon src="src\assets\icons\post\calendar-day.svg" alt="" />{' '}
               {formatDistanceToNow(new Date(postData.created_at), {
                 addSuffix: true,
                 locale: ptBR,
               })}
             </s.Stats>
-            <s.Stats>*icon* {postData.comments}</s.Stats>
+            <s.Stats>
+              <s.Icon src="src\assets\icons\post\comment.svg" alt="" />{' '}
+              {postData.comments} comentários
+            </s.Stats>
           </s.StatsContainer>
         </s.PostInformation>
       </s.PostInfoCard>

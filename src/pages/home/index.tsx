@@ -41,19 +41,30 @@ export function Home() {
               href={`https://github.com/${userData.login}`}
               target="_blank"
             >
-              GITHUB *icon*
+              GITHUB{' '}
+              <s.Icon
+                size={12}
+                src="src\assets\icons\arrow-up-right-from-square.svg"
+                alt=""
+              />
             </s.GithubLink>
           </s.NameContainer>
 
           <s.Bio>{userData.bio}</s.Bio>
 
           <s.SocialsInfo>
-            <s.Socials>*icon* {userData.login}</s.Socials>
             <s.Socials>
-              *icon*{' '}
+              <s.Icon src="src\assets\icons\github.svg" alt="" />{' '}
+              {userData.login}
+            </s.Socials>
+            <s.Socials>
+              <s.Icon src="src\assets\icons\home\building.svg" alt="" />
               {userData.company !== null ? userData.company : 'Indefinido'}
             </s.Socials>
-            <s.Socials>*icon* {userData.followers} seguidores</s.Socials>
+            <s.Socials>
+              <s.Icon src="src\assets\icons\home\user-group.svg" alt="" />{' '}
+              {userData.followers} seguidores
+            </s.Socials>
           </s.SocialsInfo>
         </s.UserInformation>
       </s.UserProfileCard>

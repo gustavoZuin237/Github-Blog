@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 
 export const HomePageContainer = styled.div`
   display: flex;
@@ -30,6 +30,16 @@ export const UserInformation = styled.div`
   width: calc(100% - 9.25rem);
   display: flex;
   flex-direction: column;
+`
+
+interface IconProps {
+  size?: number
+  theme: DefaultTheme
+}
+
+export const Icon = styled.img`
+  width: ${(props: IconProps) => (props.size === 12 ? `12px` : `18px`)};
+  height: ${(props: IconProps) => (props.size === 12 ? `12px` : `18px`)};
 `
 
 export const NameContainer = styled.div`
@@ -74,6 +84,9 @@ export const SocialsInfo = styled.div`
 `
 
 export const Socials = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: ${(props) => props.theme['base-subtitle']};
   line-height: 1.6;
 `
